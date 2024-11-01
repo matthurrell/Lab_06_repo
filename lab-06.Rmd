@@ -29,7 +29,8 @@ diamonds <- diamonds %>% rename(
 ```{r}
 
 miamonds <- diamonds %>% 
-  mutate(mean_price = mean(price), mean_carat = mean(carat))
+  mutate(mean_price = mean(price), mean_carat = mean(carat)) %>% 
+  filter(cut == "Ideal" | cut == "Fair")
 
 making_col_plot = function(df, i, j, k) {
   df %>% 
@@ -46,8 +47,8 @@ df %>%
   theme_bw()
 }
 
-making_col_plot(miamonds, color, price, carat)
-making_line_plot(miamonds, length_mm, mean_price, cut)
+making_col_plot(miamonds, cut, price, carat)
+making_line_plot(miamonds, length_mm, price, cut)
 
 
 ```
