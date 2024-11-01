@@ -32,14 +32,22 @@ miamonds <- diamonds %>%
   mutate(mean_price = mean(price), mean_carat = mean(carat))
 
 making_col_plot = function(df, i, j, k) {
+  df %>% 
+    ggplot(aes(x = {{i}}, y = {{j}}, fill = {{k}}))+
+    geom_col()+
+    theme_bw()
+}
+
+making_line_plot = function(df, l, m, n){
 df %>% 
-  ggplot(aes(x = {{i}}, y = {{j}}, fill = {{k}}))+
-  geom_col()+
+   ggplot(aes(x = {{l}}, y = {{m}}, color = {{n}}))+
+  geom_point()+
+  geom_smooth(method = lm, se = FALSE)+
   theme_bw()
 }
 
 making_col_plot(miamonds, color, price, carat)
-making_col_plot(miamonds, cut, mean_price, clarity)
+making_line_plot(miamonds, length_mm, mean_price, cut)
 
 
 ```
